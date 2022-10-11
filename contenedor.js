@@ -25,9 +25,9 @@ class Contenedor {
             }
 
             productos.push(nuevoProducto);
-            console.log(`se agrego ${nuevoProducto.title} a ${this.nombreArchivo}`);
             this.objects = productos          
-            return await fs.promises.writeFile(this.fileName, JSON.stringify(this.objects, null, 2));     
+            await fs.promises.writeFile(this.fileName, JSON.stringify(this.objects, null, 2));
+            return nuevoProducto.id;                 
         } catch (error) {
             console.log(error);
         }
@@ -52,7 +52,6 @@ class Contenedor {
         try {
             const contenidoData = await fs.promises.readFile(this.fileName, 'utf-8');
             const data = JSON.parse(contenidoData);
-            console.log(data);
             return data;
         } catch (error) {
             console.log(error);
@@ -96,7 +95,7 @@ const testSave = async () => {
 }
 
 
-//testSave();
+testSave();
 //productos.getAll();
 //productos.getById(2);
 //productos.deleteById(2);
